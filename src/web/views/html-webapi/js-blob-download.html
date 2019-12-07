@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 100px;">
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="expires" content="0"> -->
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <title>test css3 and h5 api</title>
+  <link rel="icon" href="assets/images/logo.ico" type="image/png">
+  <style>
+    
+  </style>
+</head>
+
+<body>
+  <button id="getUserData">Get user data</button>
+  <button id="outputExecl" click="doDowload">导出excel</button>
+</body>
+
+<script src="https://google.github.io/traceur-compiler/bin/traceur.js"></script>
+<script src="https://google.github.io/traceur-compiler/bin/BrowserSystem.js"></script>
+
+<script type="module">
+  import Ajax from './src/ajax.js'
+  let ajax1 = new Ajax()
+  let ajax2 = new Ajax()
+
+  document.querySelector('#getUserData').addEventListener('click', () => {
+    ajax2.get({
+      method: 'GET',
+      async: true,
+      url: '/api/test3',
+      params: {
+        a: 123,
+        b: 34
+      },
+      timeout: 30000,
+      headers: {
+        contentType: 'application/json; charset=UTF-8'
+      }
+    }).then(res => {
+      console.info(res)
+    }).catch(err => {
+      console.error(err)
+    })
+  })
+
+  document.querySelector('#outputExecl').addEventListener('click', () => {
+    ajax1.getBinary({
+      method: 'GET',
+      async: true,
+      url: '/download-excel',
+      params: {
+        a: 123,
+        b: 34
+      },
+      timeout: 30000,
+      headers: {
+        contentType: 'application/json; charset=UTF-8'
+      }
+    }).then(res => {
+      console.info(res)
+    }).catch(err => {
+      console.error(err)
+    })
+  })
+</script>
+
+</html>

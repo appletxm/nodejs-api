@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 100px;">
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="expires" content="0"> -->
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <title>test css3 and h5 api</title>
+  <link rel="icon" href="assets/images/logo.ico" type="image/png">
+  <style>
+    
+  </style>
+</head>
+
+<body>
+  <div id="js-id-doc">
+      <button>导出excel</button>
+      <input type="text" value="123456" />
+      <lable>12345678</lable>
+  </div>
+  
+</body>
+
+<script type="text/javascript">
+  var doc = document.querySelector("#js-id-doc");
+
+  function observerWithMutationObserver() {
+    var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+    var MutationObserverConfig = {
+      childList: true,
+      subtree: true,
+      characterData: true
+    };
+    var observer = new MutationObserver(function(mutations){
+      console.info('=======', arguments)
+      do_render(mutations);
+    });
+    observer.observe(doc, MutationObserverConfig);
+  }
+  
+  function observerWithMutationEvent() {
+    doc.addEventListener("DOMSubtreeModified", function(evt) {
+      console.info('***********', arguments)
+      do_render(evt);
+    }, false);
+  }
+  
+
+  function do_render(arg) {
+    console.info('do_render:', arg)
+  }
+
+  observerWithMutationObserver()
+  observerWithMutationEvent()
+
+  doc.removeChild(document.querySelector('input'))
+</script>
+
+</html>

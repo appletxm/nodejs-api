@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html lang="en" style="font-size: 100px;">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <title>test css3 var</title>
+  <link rel="icon" href="assets/images/logo.ico" type="image/png">
+  <style>
+    body {
+      font-size: .12rem;
+    }
+    :root{
+      --color: red;
+      --fontWeight: 200;
+    }
+
+    .f {
+      --color: #aaa
+    }
+
+    .box {
+      --width: 1.2rem;
+      --heigh: calc(var(--width) / 2);
+    }
+
+    .box .inner {
+      color: var(--color);
+      width: var(--width);
+      height: var(--heigh);
+    }
+
+    h2 {
+      color: var(--color);
+      font-weight: var(--fontWeight);
+    }
+
+    h1 {
+      color: var(--color);
+      font-weight: var(--fontWeight);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>i'm global scope color is red</h1>
+  <div class="f">
+    <h2>i'm private scope color is gray</h2>
+  </div>
+
+  <div class="box">
+    <p class="inner">this is inner css style</p>
+  </div>
+
+  <button id="getCss">get css</button>
+
+  <script type="text/javascript">
+    document.querySelector('#getCss').addEventListener('click', function(e){
+      let map = document.querySelector('.inner').computedStyleMap()
+      console.info(map.get('height'))
+
+    }, false)
+
+    document.addEventListener('DOMContentLoaded', function(){
+      console.info('=========DOMContentLoaded=========')
+    }, false)
+
+    window.addEventListener('load', function(){
+      console.info('=========load=========')
+    }, false)
+  </script>
+</body>
+
+</html>

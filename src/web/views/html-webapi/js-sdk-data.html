@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html lang="en" style="font-size: 100px;">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <title>test css3 and h5 api</title>
+  <link rel="icon" href="../assets/images/logo.ico" type="image/png">
+  <style>
+    body {
+      font-size: .12rem;
+    }
+  </style>
+</head>
+<body>
+  <button id="test-btn">send data to server side</button>
+
+  <script src="../build/hf-js-sdk.min.js"></script>
+  <script type="text/javascript">
+    HFAgent.init({
+      appKey: '7ab928574cf24c0fa6cf55c8cfec26c1'
+    })
+    
+    document.querySelector('#test-btn').addEventListener('click', function() {
+      HFAgent.onEvent("gradedHomework",'{"actorAgentOpenid":"d4618c23-d612-4709-8d9a-478d87808067","actorAgentAccountName":"18612345678","actorAgentAccountHomePage":"www.header.com.cn","actorAgentName":"陆老师"}');
+    })
+
+    document.querySelector('#test-btn').addEventListener('click', function() {
+      HFAgent.onSend([
+        {
+          "schemeKey": "gradedHomework",
+          "actorAgentOpenid":"d4618c23-d612-4709-8d9a-478d87808067", 
+          "actorAgentAccountName":"18612345678",
+          "actorAgentAccountHomePage":"www.header.com.cn",
+          "actorAgentName":"陆老师"
+        },
+        {
+          "schemeKey": "gradedHomework",
+          "actorAgentOpenid":"d4618c23-d612-4709-8d9a-478d87808067", 
+          "actorAgentAccountName":"18612345678",
+          "actorAgentAccountHomePage":"www.header.com.cn",
+          "actorAgentName":"欧老师"
+        }
+      ])
+    })
+  </script>
+  
+  <!-- <script type="text/javascript">
+    var appid = '1241132132';
+    var vn = 'name';
+    var vc = '1.0.1';
+    // var TDRequestUrl = 'http://127.0.0.1:9000/app/v1';
+    var TDRequestUrl = 'http://127.0.0.1:9000/web';
+
+    (function(url) {
+      var _head = document.getElementsByTagName('head')[0];
+      var _script = document.createElement('script');
+      _script.type = 'text/javascript';
+      _script.src = url;
+      _script.addEventListener('load', function(){
+        console.info('sdk loaded scuccess')
+      })
+      _head.appendChild(_script)
+    })('../sdk-data-collection/sdk-core.js')
+
+    document.querySelector('#test-btn').addEventListener('click', function() {
+      var kv = {"广告内容": "电商双12大促", "促销品价格": "100~400RMB", "广告素材类型": "图片"};
+      TDAPP.onEvent("点击广告", "Banner广告位第一屏", kv);
+    })
+  </script> -->
+
+</body>
+</html>

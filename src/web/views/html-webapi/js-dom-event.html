@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="en" style="font-size: 100px;">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="expires" content="0"> -->
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <title>test css3 and h5 api</title>
+  <link rel="icon" href="assets/images/logo.ico" type="image/png">
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-size: .12rem;
+    }
+    .box {
+      margin-right: .1rem;
+      list-style: none;
+      display: flex;
+      flex-flow: wrap;
+      padding-bottom: .1rem;
+    }
+
+    li {
+      word-wrap: break-word;
+      word-break: break-all;
+      padding-top: .1rem;
+      box-sizing: border-box;
+      width: 2rem;
+      margin-left: .1rem;
+      height: auto;
+    }
+
+    li span {
+      display: block;
+      background: #eee;
+      padding: .1rem;
+    }
+
+    li b {
+      display: block;
+      font-size: .16rem;
+      font-weight: 500;
+    }
+
+    li i {
+      display: block;
+      font-style: normal;
+      margin-top: .1rem;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+  <ul class="box">
+    <li>
+      <span>
+        <img src="./assets/images/bg.jpg" width="50">
+        <b>数据内容</b>
+        <i>具体内容具体内容，具体内容具体内容，具体内容具体内容。具体内容具体内容，具体内容具体内容，具体内容具体内容。</i>
+      </span>
+    </li>
+  </ul>
+
+  <div class="test">click me test</div>
+
+  <button id="customizeClick">trigger html customize event</button>
+
+  <div id="eventT">recieve data: </div>
+
+  <p><label><input type="checkbox" id="checkbox"> Checked</label>
+  <p><button id="button">Click me</button>
+
+  <!-- <div id="p">
+    parent
+    <div id="c">
+      child
+    </div>
+  </div> -->
+
+  <script>
+    var box = document.querySelector('.box')
+    var img = document.querySelector('img')
+    var span = document.querySelector('span')
+
+    document.addEventListener('click', function(event) {
+      console.info('document catch', event.eventPhase)
+      // console.info(event.target, event.currentTarget)
+    }, true)
+
+    document.addEventListener('click', function(event) {
+      console.info('document bobuule', event.eventPhase)
+      // console.info(event.target, event.currentTarget)
+    }, false)
+
+    box.addEventListener('click', function(event) {
+      console.info('box catch', event.eventPhase)
+      // console.info(event.target, event.currentTarget)
+    }, true)
+    box.addEventListener('click', function(event) {
+      console.info('box boubble', event.eventPhase)
+      // console.info(event.target, event.currentTarget)
+    }, false)
+
+    img.addEventListener('click', function(event) {
+      console.info('img catch 3', event.eventPhase)
+      // console.info(event.target, event.currentTarget)
+    }, true)
+    img.addEventListener('click', function(event) {
+      console.info('img catch', event.eventPhase)
+      // console.info(event.target, event.currentTarget)
+    }, true)
+    img.addEventListener('click', function(event) {
+      console.info('img catch 2', event.eventPhase)
+      // console.info(event.target, event.currentTarget)
+    }, true)
+    img.addEventListener('click', function(event) {
+      console.info('img boubble', event.eventPhase)
+      // console.info(event.target, event.currentTarget)
+      // event.stopPropagation()
+      // event.stopImmediatePropagation()
+    }, false)
+    img.addEventListener('click', function(event) {
+      console.info('img boubble 2', event.eventPhase)
+      // console.info(event.target, event.currentTarget)
+    }, false)
+
+    span.addEventListener('click', function(event) {
+      console.info('span catch', event.eventPhase)
+      // console.info(event.target, event.currentTarget)
+    }, true)
+    span.addEventListener('click', function(event) {
+      console.info('span boubble', event.eventPhase)
+      // console.info(event.target, event.currentTarget)
+    }, false)
+
+    document.querySelector('.test').addEventListener('click', function(event) {
+      console.info('test div boubble', event.eventPhase)
+      // console.info(event.target, event.currentTarget)
+    }, false)
+    document.querySelector('.test').addEventListener('click', function(event) {
+      console.info('test div catch', event.eventPhase)
+      // console.info(event.target, event.currentTarget)
+    }, true)
+
+    //   var p = document.getElementById('p'),
+    //       c = document.getElementById('c');
+    //   p.addEventListener('click', function (e) {
+    //     alert('父节点冒泡')
+    //   }, false);
+
+    //   c.addEventListener('click', function (e) {
+    //     alert('子节点捕获')
+    //   }, true);
+    //   c.addEventListener('click', function (e) {
+    //     alert('子节点冒泡')
+    //   }, false);
+    //   p.addEventListener('click', function (e) {
+    //     alert('父节点捕获')
+    //   }, true);
+    // 
+
+    /*
+      HTMLEvents	   HTMLEvent	 initEvent()
+      MouseEvents	   MouseEvent	 initMouseEvent()
+      UIEvents	     UIEvent	   initUIEvent()
+    */
+    var event = document.createEvent('HTMLEvents');
+    event.initEvent('build', true, true);
+    document.addEventListener('build', function (e) {
+      console.info(e)
+    }, false);
+    // setTimeout(function() {
+    //   document.querySelector('#customizeClick').dispatchEvent(event);
+    // }, 1000)
+
+    /*
+    Event
+    */
+    var eventC = new CustomEvent('myevent_c', {detail: {a:1}});
+    eventC.detail.a = 456; // Ignored in sloppy mode, throws in strict mode
+    // console.log(eventC, eventC.detail); // 123
+
+    var eventE = new Event('myevent_e');
+    eventE.detail = 123; // It's not readonly
+    eventE.detail = 456;
+    // console.log(eventE, eventE.detail); // 456
+
+    // var eventE = new MouseEvent()
+    
+    
+    document.querySelector('#eventT').addEventListener('myevent_c', function(e) {
+      console.info('myevent_c:', e)
+      e.target.innerHTML = e.detail.a
+    })
+    document.querySelector('#eventT').addEventListener('myevent_e', function(e) {
+      console.info('myevent_e:', e)
+      e.target.innerHTML = e.detail
+    })
+    document.addEventListener('myevent_e', function(e) {
+      console.info('myevent_e document:', e)
+    })
+    document.querySelector('#eventT').dispatchEvent(eventE)
+
+    /*
+    MouseEvent
+    */
+    function simulateClick() {
+      var evt = new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      });
+      var cb = document.getElementById("checkbox"); //element to click on
+      var canceled = !cb.dispatchEvent(evt);
+      if(canceled) {
+        // A handler called preventDefault
+        alert("canceled");
+      } else {
+        // None of the handlers called preventDefault
+        alert("not canceled");
+      }
+    }
+    document.getElementById("button").addEventListener('click', simulateClick);
+  </script>
+</body>
+</html>

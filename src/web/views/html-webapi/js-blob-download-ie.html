@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 100px;">
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="expires" content="0"> -->
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <title>test css3 and h5 api</title>
+  <link rel="icon" href="../assets/images/logo.ico" type="image/png">
+  <style>
+    
+  </style>
+</head>
+
+<body>
+  <button id="outputExecl" click="doDowload">导出excel</button>
+</body>
+
+<script type="text/javascript">
+  function downLoadExcel() {
+    var xhr
+    if (window.XMLHttpRequest) {
+      xhr = new XMLHttpRequest()
+    } else if (window.ActiveXObject) {
+      xhr = new ActiveXObject('Microsoft.XMLHTTP')
+    }
+
+    xhr.addEventListener('readystatechange', function() {
+      var resObj
+      var resConType
+
+      if(xhr.readyState === 4 && xhr.status === 200){
+        resConType = xhr.getResponseHeader('content-type')
+        if (resConType.indexOf('application/octet-stream') >= 0 || resConType.indexOf('application/x-msdownload') >= 0) {
+          var blob = new Blob([xhr.response], {type: "application/vnd.ms-excel"})
+          var contentDisposition = xhr.getResponseHeader('content-disposition')
+          var matchedObj = contentDisposition.match(/filename=([^;]+)/)
+          var fileName = matchedObj && matchedObj[1] ? decodeURIComponent(matchedObj[1]) : 'download.excel'
+
+          if (window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveOrOpenBlob(blob, fileName)
+            return false
+          }
+
+          var url = URL.createObjectURL(blob)
+          // window.open(url)
+          var a = document.createElement('a')
+          var body = document.querySelector('body')
+          if (url.indexOf(window.location.host) < 0) {
+            url = url.replace(/^(blob:)(.+)$/, function(str, $1, $2) {
+              return $1 + (window.location.protocol + '//' + window.location.host + '/') + $2
+            }) 
+          }
+          a.href = url
+          a.download = fileName
+          body.appendChild(a)
+          a.click()
+          body.removeChild(a)
+        } else {
+          resObj = JSON.parse(xhr.responseText)
+        }
+      } else if(xhr.readyState === 4 && xhr.status !== 200){
+        // rejectCb({code: '9999', msg: 'get data failed'})
+      }
+    })
+
+    xhr.addEventListener('timeout', function() {
+      // rejectCb({code: '10000', msg: 'request timeout'})
+      console.info('time out')
+    })
+
+    // xhr.addEventListener('progress', function(e) {
+    //   options.onProgress(e)
+    // })
+
+    xhr.open('GET', '/download-excel' + 'timestamp=' + new Date().getTime(), true)
+    try {
+      xhr.timeout = 10000
+      xhr.responseType = "arraybuffer"
+    } catch(err) {
+      console.error('init ajax error', err)
+    }
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
+    xhr.send(null)
+
+    return xhr
+  }
+  
+  document.querySelector('#outputExecl').addEventListener('click', function() {
+    downLoadExcel()
+  })
+</script>
+
+</html>

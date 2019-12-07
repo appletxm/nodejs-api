@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html lang="en" style="font-size: 100px;">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="expires" content="0"> -->
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <title>test css3 and h5 api</title>
+  <link rel="icon" href="assets/images/logo.ico" type="image/png">
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-size: .12rem;
+    }
+    .box {
+      margin-right: .1rem;
+      list-style: none;
+      display: flex;
+      flex-flow: wrap;
+      padding-bottom: .1rem;
+    }
+
+    li {
+      word-wrap: break-word;
+      word-break: break-all;
+      padding-top: .1rem;
+      box-sizing: border-box;
+      width: 2rem;
+      margin-left: .1rem;
+      height: auto;
+    }
+
+    li span {
+      display: block;
+      background: #eee;
+      padding: .1rem;
+    }
+
+    li b {
+      display: block;
+      font-size: .16rem;
+      font-weight: 500;
+    }
+
+    li i {
+      display: block;
+      font-style: normal;
+      margin-top: .1rem;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+  <ul class="box">
+    <li>
+      <span>
+        <img src="./assets/images/bg.jpg" width="50">
+        <b>数据内容</b>
+        <i>具体内容具体内容，具体内容具体内容，具体内容具体内容。具体内容具体内容，具体内容具体内容，具体内容具体内容。</i>
+      </span>
+    </li>
+
+    <li>
+      <span>
+        <img src="./assets/images/bg.jpg" width="50">
+        <b>数据内容</b>
+        <i>具体内容具体内容，具体内容具体内容，具体内容具体内容。具体内容具体内容，具体内容具体内容，具体内容具体内容。具体内容具体内容，具体内容具体内容，具体内容具体内容。具体内容具体内容，具体内容具体内容，具体内容具体内容。具体内容具体内容，具体内容具体内容，具体内容具体内容。</i>
+      </span>
+    </li>
+
+    <li>
+      <span>
+        <img src="./assets/images/bg.jpg" width="50">
+        <b>数据内容</b>
+        <i>具体内容具体内容，具体内容具体内容，具体内容具体内容。具体内容具体内容，具体内容具体内容，具体内容具体内容。具体内容具体内容，具体内容具体内容，具体内容具体内容。具体内容具体内容，具体内容具体内容，具体内容具体内容。</i>
+      </span>
+    </li>
+
+    <li>
+      <span>
+        <img src="./assets/images/bg.jpg" width="50">
+        <b>数据内容</b>
+        <i>具体内容具体内容，具体内容具体内容，具体内容具体内容。</i>
+      </span>
+    </li>
+
+    <li>
+      <span>
+        <img src="./assets/images/bg.jpg" width="50">
+        <b>数据内容</b>
+        <i>具体内容具体内容，具体内容具体内容，具体内容具体内容。</i>
+      </span>
+    </li>
+  
+    <li>
+      <span>
+        <img src="./assets/images/bg.jpg" width="50">
+        <b>数据内容</b>
+        <i>具体内容具体内容，具体内容具体内容，具体内容具体内容。具体内容具体内容，具体内容具体内容，具体内容具体内容。</i>
+      </span>
+    </li>
+  
+    <li>
+      <span>
+        <img src="./assets/images/bg.jpg" width="50">
+        <b>数据内容</b>
+        <i>具体内容具体内容，具体内容具体内容，具体内容具体内容。具体内容具体内容，具体内容具体内容，具体内容具体内容。具体内容具体内容，具体内容具体内容，具体内容具体内容。</i>
+      </span>
+    </li>
+
+    <li>
+      <span>
+        <img src="./assets/images/bg.jpg" width="50">
+        <b>数据内容</b>
+        <i>具体内容具体内容，具体内容具体内容，具体内容具体内容。</i>
+      </span>
+    </li>
+
+    <li>
+      <span>
+        <img src="./assets/images/bg.jpg" width="50">
+        <b>数据内容</b>
+        <i>具体内容具体内容，具体内容具体内容，具体内容具体内容。具体内容具体内容，具体内容具体内容，具体内容具体内容。具体内容具体内容，具体内容具体内容，具体内容具体内容。</i>
+      </span>
+    </li>
+  </ul>
+
+  <script>
+    var box = document.querySelector('.box')
+    box.addEventListener('click', function(event) {
+      console.info('box boubble')
+      console.info(event.target, event.currentTarget)
+    }, false)
+
+    box.addEventListener('click', function(event) {
+      console.info('box catch')
+      console.info(event.target, event.currentTarget)
+    }, true)
+  </script>
+</body>
+</html>

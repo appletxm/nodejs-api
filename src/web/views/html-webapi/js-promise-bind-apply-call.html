@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html lang="en" style="font-size: 100px;">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="expires" content="0"> -->
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <title>test css3 and h5 api</title>
+  <link rel="icon" href="assets/images/logo.ico" type="image/png">
+</head>
+
+<body>
+  <script src="https://google.github.io/traceur-compiler/bin/traceur.js"></script>
+  <script src="https://google.github.io/traceur-compiler/bin/BrowserSystem.js"></script>
+
+  <script type="module">
+    import { MyPromise } from './src/my-promise.js'
+    import initMyCall from './src/my-call.js'
+    import initMyApply from './src/my-apply.js'
+    import initBind from './src/my-bind.js'
+    import myNew from './src/my-new.js'
+    
+    let p1 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('time1')
+      }, 2000)
+    })
+
+    let p2 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        reject('time2')
+      }, 2000)
+    })
+
+    p1.then(res => {
+      console.info('##1##', res)
+      return p2
+    }).then(res => {
+      console.info('##2##', res)
+    }).catch(err => {
+      console.info('##3##', err)
+    }).finally(() => {
+      console.info('##4## finally')
+    })
+
+    initMyCall()
+    let obj2 = {
+      a: 1,
+      b: 2,
+      syaHi() {
+        console.info('say:', this.a, '===', this.b)
+      }
+    }
+    function testCall(name, age, job) {
+      console.info('content value:', name, age, job)
+      this.syaHi()
+    }
+    testCall.myCall(obj2, 'mm', 30, 'worker')
+
+
+    initMyApply()
+    let obj = {
+      a: 1,
+      b: 2,
+      syaHi() {
+        console.info('say:', this.a, '===', this.b)
+      }
+    }
+    function testApply(name, age, job) {
+      console.info('content value:', name, age, job)
+      this.syaHi()
+    }
+    testApply.myApply(obj, ['mm', 30, 'worker'])
+
+    initBind()
+    let obj3 = {
+      a: 1,
+      b: 2,
+      syaHi() {
+        console.info('say:', this.a, '===', this.b)
+      }
+    }
+    function boundFn() {
+      this.a = 1
+      this.b = 2
+    }
+    boundFn.prototype.syaHi = function() {
+      console.info('say:', this.a, '===', this.b)
+    }
+
+    function testBind(arr, name, age, job) {
+      console.info('content value:', arr, name, age, job)
+      this.syaHi()
+    }
+    testBind.myBind(obj3, [1, 2, 3])('mm', 30, 'worker')
+    testBind.myBind(boundFn, [1, 2, 3])('mm', 30, 'worker')
+
+    function testNew(a, b) {
+      this.a = a
+      this.b = b
+    }
+    testNew.prototype.syaHi = function() {
+      console.info('say:', this.a, '===', this.b)
+    }
+    let a = myNew(testNew, 5, 6)
+    a.syaHi()
+  </script>
+</body>
+
+</html>

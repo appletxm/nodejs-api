@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html lang="en" style="font-size: 100px;">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="expires" content="0"> -->
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <title>test css3 and h5 api</title>
+  <link rel="icon" href="assets/images/logo.ico" type="image/png">
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-size: .12rem;
+    }
+    .box {
+      width: 100%;
+      display: block;
+      list-style: none;
+    }
+
+    .box li {
+      width: 2rem;
+      display: inline-block;
+      position: relative;
+      max-height: 3rem;
+      background-color: #f0f0f0;
+      overflow: hidden;
+      margin: .1rem 0 0 .1rem;
+    }
+
+    .box li::before {
+      content: " ";
+      display: block;
+      padding-top: 100%;
+    }
+
+    .box li img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform:translateX(-50%) translateY(-50%);
+      width: 96%;
+    }
+
+    .box-float {
+      background-color: green;
+    }
+
+    .box-float::after {
+      content: " ";
+      display: block;
+      clear: both;
+    }
+
+    .box-float p {
+      float: left;
+      background-color: red;
+      width: 30%;
+    }
+    .box-float div {
+      float: right;
+      background-color: gray;
+      width: 50%;
+    }
+    .test-sink {
+      width: 20%;
+      position: relative;
+      margin: .1rem;
+      overflow: hidden;
+      background: gray;
+    }
+
+    .test-sink::before{
+      padding-top: 141%; /*the pic's size is 474x668 px*/
+      content: " ";
+      display: block;
+    }
+
+    .test-sink img {
+      position: absolute;
+      top: 0;
+      background: gray;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-sink">
+    <img src="https://cn.bing.com/th?id=OIP.2kexemAshzs-u4e-9_AnvwHaKc&pid=Api&rs=1&p=0" />
+  </div>
+    
+  <ul class="box">
+    <li><img src="https://cn.bing.com/th?id=OIP.s2L_4xYaGK6bGy33UidzkgHaEo&pid=Api&rs=1&p=0" /></li>
+    <li><img src="https://www.backgroundsy.com/file/preview/energy-flow.jpg" /></li>
+    <li><img src="https://cn.bing.com/th?id=OIP.2kexemAshzs-u4e-9_AnvwHaKc&pid=Api&rs=1&p=0" /></li>
+    <li><img src="https://cn.bing.com/th?id=OIP.2kexemAshzs-u4e-9_AnvwHaKc&pid=Api&rs=1&p=0" /></li>
+    <li><img src="https://cn.bing.com/th?id=OIP.cIvQo5wmlVTBLDbydjTTrAHaFj&pid=Api&rs=1&p=0" /></li>
+    <li><img src="https://cn.bing.com/th?id=OIP.T0gDxmrDbIyJgXfkqPQRLwHaFD&pid=Api&rs=1&p=0" /></li>
+    <li><img src="https://cn.bing.com/th?id=OIP.QB_OjbhLFsmJUssSLjzdQgHaEo&pid=Api&rs=1&p=0" /></li>
+  </ul>
+
+  <!-- <div class="box-float">
+    <p>111111111111111111111 1111111111 sddddddddddd</p>
+    <div>111111111111111111111 1111111111 sddddddddddd</div>
+  </div> -->
+</body>
+</html>

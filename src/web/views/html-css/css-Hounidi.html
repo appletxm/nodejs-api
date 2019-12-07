@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html lang="en" style="font-size: 100px;">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <title>test css3 var</title>
+  <link rel="icon" href="assets/images/logo.ico" type="image/png">
+  <style>
+    body {
+      font-size: .12rem;
+    }
+    :root{
+      --color: red;
+      --fontWeight: 200;
+      --toothWidth: 2rem;
+      --toothHeight: 1rem;
+    }
+
+    .f {
+      --color: #aaa
+    }
+
+    .box {
+      --width: 1.2rem;
+      --heigh: calc(var(--width) / 2);
+    }
+
+    .box .inner {
+      display: inline-block;
+      color: var(--color);
+      width: var(--width);
+      height: var(--heigh);
+      vertical-align: middle;
+    }
+
+    .box .inner-new {
+      background-image: paint(placeholder-box);
+      border: 2px solid orangered;
+    }
+
+    h2 {
+      color: var(--color);
+      font-weight: var(--fontWeight);
+    }
+
+    h1 {
+      color: var(--color);
+      font-weight: var(--fontWeight);
+    }
+
+    @supports (background: paint(id)) {
+      .box {
+        background-color: green;
+        color: #fff;
+      }
+
+      .box .inner {
+        color: #fff;
+      }
+    }
+
+    .placeholder {
+      display: inline-block;
+      background-image: paint(placeholder-box);
+      background-color: white;
+      border: 5px solid purple;
+      width: .5rem;
+      height: .5rem;
+      vertical-align: middle;
+      border-radius: .3rem;
+      font-size: 50px;
+      line-height: .5rem;
+      text-align: center;
+      color: orangered;
+    }
+
+    .test-box {
+      width: var(--toothWidth);
+      height: var(--toothHeight);
+      background: orangered;
+      background-image: paint(jagged-edge);
+    }
+
+    .solid {
+      background-image: paint(solid-color);
+      color: #c0eb75;
+      width: var(--toothWidth);
+      height: var(--toothHeight);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>i'm global scope color is red</h1>
+  <div class="f">
+    <h2>i'm private scope color is gray</h2>
+  </div>
+
+  <div class="box">
+    <p class="inner">this is inner css style</p>
+    <p class="inner inner-new"></p>
+    <span class="placeholder">1</span>
+  </div>
+
+  <div class="test-box"></div>
+
+  <div class="solid"></div>
+
+  <button id="getCss">get css</button>
+
+  <script type="text/javascript">
+    document.querySelector('#getCss').addEventListener('click', function(e){
+      let map = document.querySelector('.inner').computedStyleMap()
+      console.info(map.get('height'))
+    }, false)
+
+    document.addEventListener('DOMContentLoaded', function(){
+      console.info('=========DOMContentLoaded=========')
+    }, false)
+
+    window.addEventListener('load', function(){
+      console.info('=========load=========')
+    }, false)
+  </script>
+
+  <script>
+    function setInitVal() {
+      if (CSS && CSS['registerProperty']) {
+        CSS.registerProperty({
+            name: '--tooth-width',
+            syntax: '<length>',
+            initialValue: '40px',
+            inherits: false
+        });
+        CSS.registerProperty({
+            name: '--tooth-height',
+            syntax: '<length>',
+            initialValue: '20px',
+            inherits: false
+        });
+      }
+    }
+
+    function addPaint() {
+      if (CSS && CSS.paintWorklet) {
+        CSS.paintWorklet.addModule('css-hounidi/place-box-painter.js');
+        CSS.paintWorklet.addModule('css-hounidi/jagged-edge-painter.js');
+        CSS.paintWorklet.addModule('css-hounidi/solid-color-painter.js');
+      }  
+    }
+
+    setInitVal()
+    addPaint()
+  </script>
+</body>
+
+</html>
