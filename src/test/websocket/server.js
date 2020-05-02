@@ -26,4 +26,3 @@ server.on('upgrade', (req, socket, upgradeHead) => {
   const websocket = new WebSocket()
   websocket.setSocket(socket)
 })
-
