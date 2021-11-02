@@ -4,7 +4,7 @@
   "private": false,
   "scripts": {
     "sdk:dev": "concurrently --kill-others \"npm run rollup:watch\" \"npm run server\"",
-    "spwan-test": "node ./src/test/spawn-child.js"
+    "spwan-test": "node ./src/test/spawn/spawn-child.js"
   },
   "dependencies": {
     "@babel/runtime": "^7.6.3",
