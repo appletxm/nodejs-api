@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": false,
   "scripts": {
-    "sdk:dev": "concurrently --kill-others \"npm run rollup:watch\" \"npm run server\""
+    "sdk:dev": "concurrently --kill-others \"npm run rollup:watch\" \"npm run server\"",
+    "spwan-test": "node ./src/test/spawn-child.js"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
