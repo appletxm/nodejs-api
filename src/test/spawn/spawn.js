@@ -27,9 +27,9 @@ child.stderr.on('data', (data) => {
   console.error(`stderr: ${data}`);
 });
 
-// child.on('close', (code) => {
-//   console.log(`child process exited with code ${code}`);
-// });
+child.on('close', (code) => {
+  console.log(`child process exited with code ${code}`);
+});
 
 // child.on('message', (message) => {
 //   console.log('**=====parent recieved**', message)
